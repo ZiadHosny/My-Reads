@@ -15,30 +15,21 @@ const Search = () => {
 
   const changeShelf = (changedBook, shelf) => {
     BooksAPI.update(changedBook, shelf).then((response) => {
-      // set shelf for new or updated book
       changedBook.shelf = shelf;
-      // update state with changed book
-      this.setState((prevState) => ({
-        books: prevState.books
-          // remove updated book from array
-          .filter((book) => book.id !== changedBook.id)
-          // add updated book to array
-          .concat(changedBook),
-      }));
+      setBooks(
+        books.filter((book) => book.id !== changedBook.id).concat(changedBook)
+      );
     });
   };
 
   const getBooks = (event) => {
     const query = event.target.value;
     setQuery(query);
-
-    // if user input => run the search
+    
     if (query) {
       BooksAPI.search(query.trim(), 20).then((books) => {
         books.length > 0 ? setNewBooks(books) : setNewBooks([]);
       });
-
-      // if query is empty => reset state to default
     } else setNewBooks([]);
   };
 

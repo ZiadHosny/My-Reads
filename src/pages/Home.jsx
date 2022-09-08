@@ -13,16 +13,10 @@ const Home = () => {
 
   const changeShelf = (changedBook, shelf) => {
     BooksAPI.update(changedBook, shelf).then((response) => {
-      // set shelf for new or updated book
       changedBook.shelf = shelf;
-      // update state with changed book
-      this.setState((prevState) => ({
-        books: prevState.books
-          // remove updated book from array
-          .filter((book) => book.id !== changedBook.id)
-          // add updated book to array
-          .concat(changedBook),
-      }));
+      setBooks(
+        books.filter((book) => book.id !== changedBook.id).concat(changedBook)
+      );
     });
   };
 
