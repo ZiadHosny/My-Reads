@@ -28,6 +28,7 @@ const Search = () => {
     
     if (query) {
       BooksAPI.search(query.trim(), 20).then((books) => {
+        
         books.length > 0 ? setNewBooks(books) : setNewBooks([]);
       });
     } else setNewBooks([]);
