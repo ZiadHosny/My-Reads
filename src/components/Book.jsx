@@ -4,7 +4,6 @@ import ShelfChanger from './ShelfChanger';
 
 const Book = ({ book, books, changeShelf }) => {
   const title = book.title ? book.title : 'No title available';
-  console.log(book);
   return (
     <li>
       <div className="book">
